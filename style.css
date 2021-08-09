@@ -1,0 +1,153 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@400;600&display=swap");
+:root {
+  --Violet: hsl(257, 40%, 49%);
+  --Soft-Magenta: hsl(300, 69%, 71%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: url("./images/bg-mobile.svg");
+  background-color: var(--Violet);
+  height: 100vh;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  font-size: 15px;
+  background-repeat: no-repeat;
+}
+#logo {
+  height: 2rem;
+}
+#ilustration {
+  width: 100%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+main {
+  margin-top: 2rem;
+  margin-bottom: auto;
+  font-family: poppins;
+  color: white;
+  text-align: center;
+}
+h2 {
+  font-weight: 600;
+}
+p {
+  font-weight: 400;
+  margin-top: 1rem;
+  margin-bottom: 1.3rem;
+  font-family: "Open Sans";
+  line-height: 26px;
+}
+button {
+  font-family: "Open Sans";
+  background-color: white;
+  color: var(--Violet);
+  outline: none;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.7rem 5rem;
+  box-shadow: 0 1px 10px -2px rgba(0, 0, 0, 0.6);
+}
+svg {
+  fill: white;
+  height: 1rem;
+  width: 1rem;
+}
+button:hover {
+  background-color: var(--Soft-Magenta);
+  color: white;
+  cursor: pointer;
+}
+.social:hover > svg {
+  fill: var(--Soft-Magenta);
+}
+.social:hover {
+  border-color: var(--Soft-Magenta);
+  cursor: pointer;
+}
+.social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid white;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 2rem;
+}
+.socials {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: flex-end;
+}
+@media (min-width: 1440px) {
+  #logo {
+    height: 5rem;
+    padding-bottom: 1rem;
+  }
+  body {
+    background: url("./images/bg-desktop.svg");
+    background-color: var(--Violet);
+    height: 100vh;
+    padding: 5rem;
+    grid-template-columns: 10fr 9fr;
+    grid-template-rows: 2fr 7fr 2fr;
+    font-size: 30px;
+    background-repeat: no-repeat;
+    gap: 2rem;
+    background-size: cover;
+    background-position: center;
+  }
+  #ilustration {
+    grid-area: 2/1;
+    margin: auto;
+    max-width: unset;
+  }
+  p {
+    line-height: 40px;
+    margin-top: 2rem;
+    margin-bottom: 2.6rem;
+  }
+  main {
+    grid-area: 2/2;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: left;
+    margin: auto;
+  }
+  .socials {
+    grid-area: 3/2;
+    margin-left: auto;
+    margin-right: 0;
+    gap: 3rem;
+    padding-bottom: 1rem;
+  }
+  svg {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  .social {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 5rem;
+  }
+  button {
+    padding: 1.5rem 5rem;
+    font-size: 1rem;
+    box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.6);
+  }
+  h2 {
+    max-width: 20ch;
+  }
+  p {
+    max-width: 50ch;
+  }
+}
