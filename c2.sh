@@ -7,5 +7,5 @@ mkdir -p abc
 touch abc/win1.txt
 touch abc/win2.txt
 touch abc/win3.txt
-zip -r abc.zip abc
+zip -r windows.zip abc
 echo "Folder i pliki zostały utworzone."
