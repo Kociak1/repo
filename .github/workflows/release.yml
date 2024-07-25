@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: true
-          
+
       - name: Create Git tag
         id: tag
         run: |
@@ -21,10 +21,10 @@ jobs:
           git tag $TAG_NAME
           git push origin $TAG_NAME
           echo "::set-output name=tag::$TAG_NAME"
-          
+
       - name: Create GitHub Release
         id: create_release
-        uses: actions/create-release@v1
+        uses: actions/create-release@v1.1.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -33,7 +33,10 @@ jobs:
           body: Automatycznie utworzony release z plikiem build.zip
           draft: false
           prerelease: false
-          
+
+      - name: Set upload_url environment variable
+        run: echo "UPLOAD_URL=${{ steps.create_release.outputs.upload_url }}" >> $GITHUB_ENV
+  
   build1:
     name: Build my linux project ✨
     needs: build0
@@ -54,7 +57,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ env.UPLOAD_URL }}
           asset_path: ./linux.zip
           asset_name: linux.zip
           asset_content_type: application/zip
@@ -79,7 +82,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ env.UPLOAD_URL }}
           asset_path: ./windows.zip
           asset_name: windows.zip
           asset_content_type: application/zip
