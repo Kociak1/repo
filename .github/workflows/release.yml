@@ -33,6 +33,7 @@ jobs:
           prerelease: false
   build1:
     name: Build my linux project ✨
+    needs: build0
     runs-on: ubuntu-latest
     steps:
       # Checkout
@@ -56,6 +57,7 @@ jobs:
           asset_content_type: application/zip
   build2:
     name: Build my windows project ✨
+    needs: build0
     runs-on: ubuntu-latest
     steps:
       # Checkout
