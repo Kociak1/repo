@@ -1,0 +1,49 @@
+name: Create Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Git
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+    - name: Run create_files.sh
+      run: bash create_files.sh
+
+    - name: Create Git tag
+      id: tag
+      run: |
+        TAG_NAME=$(date +'%Y-%m-%d_%H-%M-%S')
+        git tag $TAG_NAME
+        git push origin $TAG_NAME
+        echo "::set-output name=tag::$TAG_NAME"
+
+    - name: Create GitHub Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.tag.outputs.tag }}
+        release_name: Release ${{ steps.tag.outputs.tag }}
+        body: Automatycznie utworzony release z plikiem abc.zip
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./abc.zip
+        asset_name: abc.zip
+        asset_content_type: application/zip
