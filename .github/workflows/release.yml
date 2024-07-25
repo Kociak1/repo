@@ -13,6 +13,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: true
+          
       - name: Create Git tag
         id: tag
         run: |
@@ -20,6 +21,7 @@ jobs:
           git tag $TAG_NAME
           git push origin $TAG_NAME
           echo "::set-output name=tag::$TAG_NAME"
+          
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
@@ -31,6 +33,7 @@ jobs:
           body: Automatycznie utworzony release z plikiem build.zip
           draft: false
           prerelease: false
+          
   build1:
     name: Build my linux project ✨
     needs: build0
@@ -55,6 +58,7 @@ jobs:
           asset_path: ./linux.zip
           asset_name: linux.zip
           asset_content_type: application/zip
+          
   build2:
     name: Build my windows project ✨
     needs: build0
